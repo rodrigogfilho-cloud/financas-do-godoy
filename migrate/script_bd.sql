@@ -3,21 +3,21 @@ CREATE DATABASE IF NOT EXISTS godoy_financas;
 USE godoy_financas;
 
 CREATE TABLE IF NOT EXISTS tb_usuarios (
- id_usuario INT PRIMARY KEY auto_increment,
+ id_usuario INT NOT NULL PRIMARY KEY auto_increment,
  login VARCHAR(100) NOT NULL,
  senha VARCHAR(255)
 );
 
 
 CREATE TABLE IF NOT EXISTS tb_categorias (
- id_categoria INT PRIMARY KEY auto_increment,
+ id_categoria INT NOT NULL PRIMARY KEY auto_increment,
  tipo VARCHAR(100),
  id_usuario INT NOT NULL
 );
 
 
 CREATE TABLE IF NOT EXISTS tb_despesas (
- id_despesa INT PRIMARY KEY auto_increment,
+ id_despesa INT NOT NULL PRIMARY KEY auto_increment,
  descricao VARCHAR(255),
  id_usuario INT NOT NULL,
  valor FLOAT(10),
