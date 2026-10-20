@@ -54,7 +54,7 @@ class Categoria:
 
         conexao, cursor = Conexao().conectar()
 
-        if conexao == None:
+        if conexao == None: # None = NADA
             print("Erro ao tentar conectar!")
             return None
         try:                
@@ -70,7 +70,7 @@ class Categoria:
                             
             conexao.close()
                 
-            return True
+            return True         #Retorna um True ou False , True : a tabela foi excluída com sucesso, já False: é o oposto
         except Exception as e:
             print(f'ERRO AO INSERIR: {e}')
             return False
