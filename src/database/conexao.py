@@ -13,7 +13,7 @@ class Conexao:
                                               user='root',
                                               password='root',
                                               database='godoy_financas')
-            cursor = conexao.cursor()
+            cursor = conexao.cursor(dictionary=True)
         
 
             return conexao, cursor
