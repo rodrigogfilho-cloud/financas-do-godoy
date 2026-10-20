@@ -4,7 +4,7 @@ USE godoy_financas;
 
 CREATE TABLE IF NOT EXISTS tb_usuarios (
  id_usuario INT NOT NULL PRIMARY KEY auto_increment,
- login VARCHAR(100) NOT NULL,
+ login VARCHAR(100) ,
  senha VARCHAR(255)
 );
 
