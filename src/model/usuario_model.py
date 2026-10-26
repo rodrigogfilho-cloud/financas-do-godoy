@@ -46,7 +46,7 @@ class Usuario:
                        """,
                     [login, senha])
     
-        resultado = cursor.fetchone()
+        resultado = cursor.fetchone() #fetchone : retorna apenas um valor
             
         conexao.close()
 
