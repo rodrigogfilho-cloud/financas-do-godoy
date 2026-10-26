@@ -21,7 +21,7 @@ class Categoria:
                 [categoria, id_usuario])
         
             conexao.commit()
-            id_categoria= cursor.lastrowid() # Ultimo id cadastrado nas categorias
+            id_categoria= cursor.lastrowid # Ultimo id cadastrado nas categorias
             conexao.close()
         
             return id_categoria
@@ -30,7 +30,7 @@ class Categoria:
             return None
 
     @staticmethod
-    def recuperar(login:str) -> list:
+    def recuperar(login:int) -> list:
 
         conexao, cursor = Conexao().conectar()
         
@@ -40,7 +40,7 @@ class Categoria:
                 
         cursor.execute("""
                         select tipo, id_categoria from tb_categorias
-                        where tipo = %s;
+                        where id_usuario = %s;
         
                         """,
                     [login])
