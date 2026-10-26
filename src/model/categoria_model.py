@@ -3,7 +3,8 @@ from src.database.conexao import Conexao
 class Categoria:
     def __init__(self):
         pass
-
+    
+    @staticmethod
     def adicionar (categoria:str, id_usuario:int) -> int:
 
         conexao, cursor = Conexao().conectar()
@@ -20,16 +21,16 @@ class Categoria:
                 [categoria, id_usuario])
         
             conexao.commit()
-            last_id= cursor.lastrowid() # Ultimo id cadastrado nas categorias
+            id_categoria= cursor.lastrowid # Ultimo id cadastrado nas categorias
             conexao.close()
         
-            return last_id
+            return id_categoria
         except Exception as erro:
             print(f'ERRO AO INSERIR: {erro}')
             return None
 
-
-    def recuperar(login:str) -> list:
+    @staticmethod
+    def recuperar(login:int) -> list:
 
         conexao, cursor = Conexao().conectar()
         
@@ -39,7 +40,7 @@ class Categoria:
                 
         cursor.execute("""
                         select tipo, id_categoria from tb_categorias
-                        where tipo = %s;
+                        where id_usuario = %s;
         
                         """,
                     [login])
@@ -49,14 +50,14 @@ class Categoria:
         conexao.close()
         
         return resultado
-
+    @staticmethod
     def excluir (id_categoria:int) -> bool:
 
         conexao, cursor = Conexao().conectar()
 
         if conexao == None: # None = NADA
             print("Erro ao tentar conectar!")
-            return None
+            return False
         try:                
             cursor.execute("""
                         DELETE FROM tb_categorias 
