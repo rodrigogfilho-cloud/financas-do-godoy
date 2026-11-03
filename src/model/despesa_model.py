@@ -116,7 +116,7 @@ class Despesa:
                             
                 
                         """,
-                        (id_categoria, descricao, valor, data, id_despesa, login))
+                        [id_categoria, descricao, valor, data, id_despesa, login])
                 
             conexao.commit()  
             conexao.close()
