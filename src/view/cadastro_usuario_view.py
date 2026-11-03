@@ -68,7 +68,12 @@ class CadastroUsuarioView(ft.View):
 
         usuario = self.campo_login.value
         senha = self.campo_senha.value
-        Usuario().cadastrar(usuario,senha)
+        if Usuario().cadastrar(usuario,senha) :
+            ft.SnackBar("Cadastrado")
+
+        
+
+        
 
 
    
