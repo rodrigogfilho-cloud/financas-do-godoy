@@ -101,7 +101,7 @@ class Despesa:
             return False
         
     @staticmethod
-    def alterar (login:int, id_despesa:int, id_categoria:int, descricao:str, valor:float) -> bool    :
+    def alterar (login:int, id_despesa:int, id_categoria:int, descricao:str, valor:float, data:str) -> bool    :
 
         conexao, cursor = Conexao().conectar()
 
@@ -111,12 +111,12 @@ class Despesa:
         try:                
             cursor.execute("""
                         UPDATE tb_despesas 
-                        SET id_categoria = %s, descricao = %s, valor = %s
+                        SET id_categoria = %s, descricao = %s, valor = %s, data = %s
                         WHERE id_despesa = %s AND id_usuario = %s
                             
                 
                         """,
-                        (id_categoria, descricao, valor, id_despesa, login))
+                        (id_categoria, descricao, valor, data, id_despesa, login))
                 
             conexao.commit()  
             conexao.close()
