@@ -40,7 +40,7 @@ class CadastroUsuarioView(ft.View):
         botao_de_cadastrar = ft.Button(content=ft.Text("Cadastrar-se", weight="BOLD"),
                                        bgcolor="#fce51c", 
                                        color="#353535",
-                                       width=200,
+                                       width=250,
                                        height=40,
                                        on_click=self.cadastrar
                                        
@@ -50,7 +50,7 @@ class CadastroUsuarioView(ft.View):
         botao_de_login = ft.Button(content=ft.Text("Fazer Login",weight="BOLD"),
                                    bgcolor="#fce51c", 
                                     color="#302F2F",
-                                    width=200,
+                                    width=250,
                                     height=40,
                                     
                                     )
