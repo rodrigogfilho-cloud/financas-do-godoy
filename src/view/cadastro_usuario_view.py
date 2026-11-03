@@ -1,4 +1,5 @@
 import flet as ft
+from src.model.usuario_model import Usuario
 
 class CadastroUsuarioView(ft.View):
     def __init__(self, pagina:ft.Page):
@@ -17,13 +18,13 @@ class CadastroUsuarioView(ft.View):
 
         # CAMPOS
 
-        campo_login = ft.TextField(label='Usuário',
+        self.campo_login = ft.TextField(label='Usuário | LOGIN',
                                     value='',
                                    bgcolor="#fdfdfdff", 
                                     color="#000000",
                               )
 
-        campo_senha = ft.TextField(label='Senha',
+        self.campo_senha = ft.TextField(label='Senha',
                                    value='',
                                    bgcolor="#fdfdfdff", 
                                     color="#000000",
@@ -31,24 +32,27 @@ class CadastroUsuarioView(ft.View):
                                     can_reveal_password=True
                               )
 
-        coluna_de_campos = ft.Column(controls=[campo_login, campo_senha],
+        coluna_de_campos = ft.Column(controls=[self.campo_login, self.campo_senha],
                                      )
 
         # BOTÕES
 
-        botao_de_cadastrar = ft.Button(content="Cadastrar-se",
-                                       bgcolor="#fdfdfdff", 
-                                       color="#000000",
+        botao_de_cadastrar = ft.Button(content=ft.Text("Cadastrar-se", weight="BOLD"),
+                                       bgcolor="#fce51c", 
+                                       color="#353535",
                                        width=200,
                                        height=40,
+                                       on_click=self.cadastrar
+                                       
                                        
                                       )
 
-        botao_de_login = ft.Button(content="Fazer Login",
-                                   bgcolor="#fdfdfdff", 
-                                    color="#000000",
+        botao_de_login = ft.Button(content=ft.Text("Fazer Login",weight="BOLD"),
+                                   bgcolor="#fce51c", 
+                                    color="#302F2F",
                                     width=200,
                                     height=40,
+                                    
                                     )
 
         coluna_de_botoes = ft.Column(controls=[botao_de_cadastrar, botao_de_login],
@@ -59,5 +63,12 @@ class CadastroUsuarioView(ft.View):
         self.controls = [title,
                          coluna_de_campos,
                          coluna_de_botoes]
+        
+    def cadastrar(self):
+
+        usuario = self.campo_login.value
+        senha = self.campo_senha.value
+        Usuario().cadastrar(usuario,senha)
+
 
    
