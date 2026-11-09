@@ -6,12 +6,14 @@ class LoginUsuarioView(ft.View):
         super().__init__()
         self.pagina = pagina
 
+        verificacao = Usuario().verificar() 
+
         self.route = "/login"
         self.bgcolor = "#fcf373"
         self.vertical_alignment="center"
         self.horizontal_alignment="center"
 
-        title = ft.Text(value="ENTRAR",
+        title = ft.Text(value="ENTRE AGORA !!!",
                         size=35,
                         margin=30,
                         weight="BOLD",
@@ -46,6 +48,7 @@ class LoginUsuarioView(ft.View):
                                     height=40,
                                     width=200,
                                     margin=10,
+                                    on_click=self.fazer_login
                                     
                                     )
 
@@ -59,6 +62,8 @@ class LoginUsuarioView(ft.View):
                                    elevation=0,
                                     color="#302F2F",
                                     height=40,
+                                    on_click=self.ir_para_cadastro
+                                    
                                  
                                                                         )
 
@@ -66,22 +71,33 @@ class LoginUsuarioView(ft.View):
                               alignment="center",
                               margin=10)
 
-        # DEF´s
-        def fazer_login ():
-            usuario = self.campo_login.value
-            senha = self.campo_senha.value
-            
-            if usuario == "" or senha == "":
-                self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="Preencha os campos",
-                color="#FFFFFF",
-                weight="BOLD", 
-                text_align="center"),bgcolor="#fce51c",
-                    ))
-                return
-
         # CONTROLS
-
+        
         self.controls = [title,
-                         coluna_de_campos,
-                         botao_login,
-                         linha_botoes]
+        coluna_de_campos,
+            botao_login,
+            linha_botoes]
+
+        # DEF´s
+    def fazer_login (self):
+        usuario = self.campo_login.value
+        senha = self.campo_senha.value
+            
+        if usuario == "" or senha == "":
+            self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="Preencha os campos",
+            color="#FFFFFF",
+            weight="BOLD", 
+            text_align="center"),bgcolor="#fce51c",
+                ))
+            return
+
+        if 
+
+        
+
+    async def ir_para_cadastro (self):
+            await self.pagina.push_route("/cadastro")
+
+            
+
+    
