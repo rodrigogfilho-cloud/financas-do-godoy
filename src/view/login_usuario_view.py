@@ -6,7 +6,7 @@ class LoginUsuarioView(ft.View):
         super().__init__()
         self.pagina = pagina
 
-        verificacao = Usuario().verificar() 
+    
 
         self.route = "/login"
         self.bgcolor = "#fcf373"
@@ -17,6 +17,7 @@ class LoginUsuarioView(ft.View):
                         size=35,
                         margin=30,
                         weight="BOLD",
+                         font_family="georgia"
                      
                         )
 
@@ -79,25 +80,32 @@ class LoginUsuarioView(ft.View):
             linha_botoes]
 
         # DEF´s
-    def fazer_login (self):
-        usuario = self.campo_login.value
-        senha = self.campo_senha.value
-            
-        if usuario == "" or senha == "":
-            self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="Preencha os campos",
-            color="#FFFFFF",
-            weight="BOLD", 
-            text_align="center"),bgcolor="#fce51c",
-                ))
-            return
-
-        if 
-
-        
+   
 
     async def ir_para_cadastro (self):
             await self.pagina.push_route("/cadastro")
 
-            
+    async def fazer_login(self):
+                
 
-    
+                usuario = self.campo_login.value
+                senha = self.campo_senha.value
+                            
+                if usuario == "" or senha == "":
+                    self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="Preencha os campos",
+                    color="#FFFFFF",
+                    weight="BOLD", 
+                    text_align="center"),bgcolor="#fce51c",
+                        ))
+                    return
+
+
+                if Usuario().verificar(usuario, senha):
+                      await self.pagina.push_route("/home")
+
+                else:
+                    self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="LOGIN OU SENHA INCORRETO",
+                                          color="#FFFFFF",
+                                          weight="BOLD", 
+                                          text_align="center"),bgcolor="#d41e1e",
+                                              ))

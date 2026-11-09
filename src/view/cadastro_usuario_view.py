@@ -12,11 +12,13 @@ class CadastroUsuarioView(ft.View):
         self.bgcolor = "#b0e2ff"
         self.vertical_alignment="center"
         self.horizontal_alignment="center"
+        
 
         title = ft.Text(value="CADASTRE SEU USUÁRIO",
                         size=35,
                         margin=50,
                         weight="BOLD",
+                        font_family="georgia"
                      
                         )
 
@@ -26,6 +28,7 @@ class CadastroUsuarioView(ft.View):
                                     value='',
                                    bgcolor="#fdfdfdff", 
                                     color="#000000",
+                                
                               )
 
         self.campo_senha = ft.TextField(label='Senha',
