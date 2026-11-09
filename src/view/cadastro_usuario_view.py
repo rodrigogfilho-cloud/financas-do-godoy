@@ -9,7 +9,7 @@ class CadastroUsuarioView(ft.View):
 
         self.route = "/cadastro"
 
-        self.bgcolor = "#eeeeee"
+        self.bgcolor = "#fcf373"
         self.vertical_alignment="center"
         self.horizontal_alignment="center"
 
@@ -56,6 +56,7 @@ class CadastroUsuarioView(ft.View):
                                     color="#302F2F",
                                     width=250,
                                     height=40,
+                                    on_click=self.ir_para_login
                                     
                                     )
 
@@ -94,5 +95,5 @@ class CadastroUsuarioView(ft.View):
                                                                 weight="BOLD",
                                                                 text_align="center"), bgcolor="#fa5151"))
            
-    def ir_para_login():
-        
+    async def ir_para_login(self):
+        await self.pagina.push_route("/login")

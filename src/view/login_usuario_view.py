@@ -13,7 +13,7 @@ class LoginUsuarioView(ft.View):
 
         title = ft.Text(value="FAÇA O LOGIN",
                         size=35,
-                        margin=40,
+                        margin=30,
                         weight="BOLD",
                      
                         )
@@ -42,13 +42,23 @@ class LoginUsuarioView(ft.View):
     
 
         botao_de_login = ft.Button(content=ft.Text("Fazer Login",weight="BOLD"),
-                                   bgcolor="#fce51c", 
+                                   bgcolor="#e0d42c", 
                                     color="#302F2F",
-                                    width=250,
+                                    
                                     height=40,
-                                    margin=50
+                                
                                     
                                     )
+        botao_para_cadastrar = ft.Button(content=ft.Text("Cadastre-se",weight="BOLD"),
+                                   bgcolor="#e0d42c", 
+                                    color="#302F2F",
+                                    height=40,
+                                 
+                                                                        )
+
+        linha_botoes = ft.Row(controls=[botao_de_login, botao_para_cadastrar],
+                              alignment="center",
+                              margin=40)
 
       
 
@@ -56,4 +66,4 @@ class LoginUsuarioView(ft.View):
 
         self.controls = [title,
                          coluna_de_campos,
-                         botao_de_login]
+                         linha_botoes]
