@@ -6,15 +6,18 @@ class LoginUsuarioView(ft.View):
         super().__init__()
         self.pagina = pagina
 
+    
+
         self.route = "/login"
         self.bgcolor = "#fcf373"
         self.vertical_alignment="center"
         self.horizontal_alignment="center"
 
-        title = ft.Text(value="FAÇA O LOGIN",
+        title = ft.Text(value="ENTRE AGORA !!!",
                         size=35,
                         margin=30,
                         weight="BOLD",
+                         font_family="georgia"
                      
                         )
 
@@ -39,28 +42,70 @@ class LoginUsuarioView(ft.View):
 
         # BOTÕES
 
-    
+        botao_login = ft.Button(content=ft.Text("Entrar",weight="BOLD"),
+                                   bgcolor="#fce51c", 
+                                   elevation=0,
+                                    color="#302F2F",
+                                    height=40,
+                                    width=200,
+                                    margin=10,
+                                    on_click=self.fazer_login
+                                    
+                                    )
 
-        botao_de_login = ft.Text(weight="BOLD",
-                                   bgcolor="transparent",
-                                   color="#302F2F")
+        txt_cadastro = ft.Text(value="Já tem uma conta?",
+                            weight="BOLD",
+                            bgcolor="transparent",
+                            color="#302F2F")
         
         botao_para_cadastrar = ft.Button(content=ft.Text("Cadastre-se",weight="BOLD"),
                                    bgcolor="transparent", 
                                    elevation=0,
                                     color="#302F2F",
                                     height=40,
+                                    on_click=self.ir_para_cadastro
+                                    
                                  
                                                                         )
 
-        linha_botoes = ft.Row(controls=[botao_de_login, botao_para_cadastrar],
+        linha_botoes = ft.Row(controls=[txt_cadastro, botao_para_cadastrar],
                               alignment="center",
-                              margin=40)
-
-      
+                              margin=10)
 
         # CONTROLS
-
+        
         self.controls = [title,
-                         coluna_de_campos,
-                         linha_botoes]
+        coluna_de_campos,
+            botao_login,
+            linha_botoes]
+
+        # DEF´s
+   
+
+    async def ir_para_cadastro (self):
+            await self.pagina.push_route("/cadastro")
+
+    async def fazer_login(self):
+                
+
+                usuario = self.campo_login.value
+                senha = self.campo_senha.value
+                            
+                if usuario == "" or senha == "":
+                    self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="Preencha os campos",
+                    color="#FFFFFF",
+                    weight="BOLD", 
+                    text_align="center"),bgcolor="#fce51c",
+                        ))
+                    return
+
+
+                if Usuario().verificar(usuario, senha):
+                      await self.pagina.push_route("/home")
+
+                else:
+                    self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="LOGIN OU SENHA INCORRETO",
+                                          color="#FFFFFF",
+                                          weight="BOLD", 
+                                          text_align="center"),bgcolor="#d41e1e",
+                                              ))

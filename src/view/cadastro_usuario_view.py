@@ -9,14 +9,16 @@ class CadastroUsuarioView(ft.View):
 
         self.route = "/cadastro"
 
-        self.bgcolor = "#fcf373"
+        self.bgcolor = "#b0e2ff"
         self.vertical_alignment="center"
         self.horizontal_alignment="center"
+        
 
         title = ft.Text(value="CADASTRE SEU USUÁRIO",
                         size=35,
                         margin=50,
                         weight="BOLD",
+                        font_family="georgia"
                      
                         )
 
@@ -26,6 +28,7 @@ class CadastroUsuarioView(ft.View):
                                     value='',
                                    bgcolor="#fdfdfdff", 
                                     color="#000000",
+                                
                               )
 
         self.campo_senha = ft.TextField(label='Senha',
@@ -42,8 +45,8 @@ class CadastroUsuarioView(ft.View):
         # BOTÕES
 
         botao_de_cadastrar = ft.Button(content=ft.Text("Cadastrar-se", weight="BOLD"),
-                                       bgcolor="#fce51c", 
-                                       color="#353535",
+                                       bgcolor="#379bdd", 
+                                       color="#FFFFFF",
                                        width=250,
                                        height=40,
                                        on_click=self.cadastrar
@@ -52,8 +55,8 @@ class CadastroUsuarioView(ft.View):
                                       )
 
         botao_de_login = ft.Button(content=ft.Text("Fazer Login",weight="BOLD"),
-                                   bgcolor="#fce51c", 
-                                    color="#302F2F",
+                                   bgcolor="#379bdd", 
+                                    color="#FFFEFE",
                                     width=250,
                                     height=40,
                                     on_click=self.ir_para_login
@@ -61,7 +64,7 @@ class CadastroUsuarioView(ft.View):
                                     )
 
         coluna_de_botoes = ft.Column(controls=[botao_de_cadastrar, botao_de_login],
-                                     margin=50)
+                                     margin=20)
 
         # CONTROLS
 
