@@ -1,9 +1,13 @@
 import flet as ft
 from src.model.usuario_model import Usuario
 
+
 class CadastroUsuarioView(ft.View):
     def __init__(self, pagina:ft.Page):
         super().__init__()
+        self.pagina = pagina
+
+        self.route = "/cadastro"
 
         self.bgcolor = "#eeeeee"
         self.vertical_alignment="center"
@@ -12,7 +16,7 @@ class CadastroUsuarioView(ft.View):
         title = ft.Text(value="CADASTRE SEU USUÁRIO",
                         size=35,
                         margin=50,
-                        weight="BOLD"
+                        weight="BOLD",
                      
                         )
 
@@ -68,12 +72,27 @@ class CadastroUsuarioView(ft.View):
 
         usuario = self.campo_login.value
         senha = self.campo_senha.value
-        if Usuario().cadastrar(usuario,senha) :
-            ft.SnackBar("Cadastrado")
 
+        if usuario == "" or senha == "":
+            self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="Preencha os campos",
+                                                                            color="#FFFFFF",
+                                                                             weight="BOLD", 
+                                                                             text_align="center"),bgcolor="#fce51c",
+                                                                             ))
+            return
+
+        # SNACKBAR MOSTRANDO QUE DEU CERTO
+        if Usuario().cadastrar(usuario,senha):
+            self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="Cadastrado efetuado com sucesso",
+                                                                color="#FFFFFF",
+                                                                 weight="BOLD", 
+                                                                 text_align="center"),bgcolor="#158000",
+                                                                 ))
+        else: 
+            self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="ERRO AO CADASTRAR",
+                                                                color="#FFFFFF",
+                                                                weight="BOLD",
+                                                                text_align="center"), bgcolor="#fa5151"))
+           
+    def ir_para_login():
         
-
-        
-
-
-   
