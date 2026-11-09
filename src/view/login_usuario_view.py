@@ -11,7 +11,7 @@ class LoginUsuarioView(ft.View):
         self.vertical_alignment="center"
         self.horizontal_alignment="center"
 
-        title = ft.Text(value="FAÇA O LOGIN",
+        title = ft.Text(value="ENTRAR",
                         size=35,
                         margin=30,
                         weight="BOLD",
@@ -39,11 +39,20 @@ class LoginUsuarioView(ft.View):
 
         # BOTÕES
 
-    
+        botao_login = ft.Button(content=ft.Text("Entrar",weight="BOLD"),
+                                   bgcolor="#fce51c", 
+                                   elevation=0,
+                                    color="#302F2F",
+                                    height=40,
+                                    width=200,
+                                    margin=30,
+                                    
+                                    )
 
-        botao_de_login = ft.Text(weight="BOLD",
-                                   bgcolor="transparent",
-                                   color="#302F2F")
+        txt_cadastro = ft.Text(value="Já tem uma conta?",
+                            weight="BOLD",
+                            bgcolor="transparent",
+                            color="#302F2F")
         
         botao_para_cadastrar = ft.Button(content=ft.Text("Cadastre-se",weight="BOLD"),
                                    bgcolor="transparent", 
@@ -53,14 +62,17 @@ class LoginUsuarioView(ft.View):
                                  
                                                                         )
 
-        linha_botoes = ft.Row(controls=[botao_de_login, botao_para_cadastrar],
+        linha_botoes = ft.Row(controls=[txt_cadastro, botao_para_cadastrar],
                               alignment="center",
-                              margin=40)
+                              margin=10)
 
-      
+        # DEF´s
+        def fazer_login ():
+            pass
 
         # CONTROLS
 
         self.controls = [title,
                          coluna_de_campos,
+                         botao_login,
                          linha_botoes]
