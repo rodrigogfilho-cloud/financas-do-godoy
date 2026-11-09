@@ -45,7 +45,7 @@ class LoginUsuarioView(ft.View):
                                     color="#302F2F",
                                     height=40,
                                     width=200,
-                                    margin=30,
+                                    margin=10,
                                     
                                     )
 
@@ -68,7 +68,16 @@ class LoginUsuarioView(ft.View):
 
         # DEF´s
         def fazer_login ():
-            pass
+            usuario = self.campo_login.value
+            senha = self.campo_senha.value
+            
+            if usuario == "" or senha == "":
+                self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="Preencha os campos",
+                color="#FFFFFF",
+                weight="BOLD", 
+                text_align="center"),bgcolor="#fce51c",
+                    ))
+                return
 
         # CONTROLS
 
