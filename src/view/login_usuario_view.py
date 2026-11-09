@@ -41,16 +41,13 @@ class LoginUsuarioView(ft.View):
 
     
 
-        botao_de_login = ft.Button(content=ft.Text("Fazer Login",weight="BOLD"),
-                                   bgcolor="#e0d42c", 
-                                    color="#302F2F",
-                                    
-                                    height=40,
-                                
-                                    
-                                    )
+        botao_de_login = ft.Text(weight="BOLD",
+                                   bgcolor="transparent",
+                                   color="#302F2F")
+        
         botao_para_cadastrar = ft.Button(content=ft.Text("Cadastre-se",weight="BOLD"),
-                                   bgcolor="#e0d42c", 
+                                   bgcolor="transparent", 
+                                   elevation=0,
                                     color="#302F2F",
                                     height=40,
                                  
