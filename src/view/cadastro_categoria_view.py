@@ -13,7 +13,7 @@ class Home(ft.View):
         self.vertical_alignment="center"
         self.horizontal_alignment="center"
 
-        title = ft.Text(value="Tela principal",
+        title = ft.Text(value="Tela Categoria",
                         size=35,
                         margin=30,
                         weight="BOLD",
@@ -21,6 +21,8 @@ class Home(ft.View):
                          color="#fa1fca"
                      
                         )
+
+        
 
         self.controls = [
             title
