@@ -7,6 +7,7 @@ class Principal(ft.View):
 
         dados_usuario = pagina.session.store.get("usuario_logado")
         nome_do_infeliz = dados_usuario.get("login")
+        
      
 
         self.route = "/principal"
@@ -16,7 +17,7 @@ class Principal(ft.View):
 
         # Textos
 
-        bem_vindo = ft.Text(value=f"BEM VINDO {nome_do_infeliz} 💚",
+        bem_vindo = ft.Text(value=f"BEM VINDO {nome_do_infeliz} ! 💚",
                             size=35,
                             weight="BOLD",
                             font_family="georgia",
@@ -30,5 +31,8 @@ class Principal(ft.View):
                             color="#FFFFFF",
                             margin= 50)
 
+        
+
         self.controls = [bem_vindo,
-                         textinho]
+                         textinho,
+                         ]

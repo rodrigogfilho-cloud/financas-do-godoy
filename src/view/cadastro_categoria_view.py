@@ -7,7 +7,9 @@ class Home(ft.View):
         super().__init__()
         self.pagina = pagina
 
-        
+        dados_usuario = pagina.session.store.get("usuario_logado")
+                
+        id_do_infeliz = dados_usuario.get("id_usuario")
 
     
 
@@ -27,7 +29,7 @@ class Home(ft.View):
 
         title = ft.Text(value="CADASTRE SUAS CATEGORIAS",
                         size=35,
-                        margin=30,
+                        margin=5,
                         weight="BOLD",
                          font_family="georgia",
                          color="#fa1fca"
@@ -39,6 +41,14 @@ class Home(ft.View):
                                                     bgcolor="transparent",
                                                     color="#302F2F",
                                                    )
+
+        textinho_id = ft.Text(value=f"Cada usuario contém seu ID para fazer cadastros de categorias e despesas. Seu ID Usuário é : {id_do_infeliz}. ",
+                                           size=20,
+                                            weight="BOLD",
+                                            font_family="georgia",
+                                            color="#FFFFFF",
+                                            margin= 50,
+                                            )
 
         # CAMPOS
 
@@ -107,6 +117,7 @@ class Home(ft.View):
         self.controls = [
             bem_vindo,
             title,
+            textinho_id,
             self.campo_nome_usuario,
             linha_add,
             linha_rec,
@@ -124,6 +135,8 @@ class Home(ft.View):
     async def adicionar (self):
            categoria = self.campo_adicionar_categoria.value
            usuario = self.campo_nome_usuario.value
+           id_usuario = int(usuario)
+           
 
            if categoria == "" or usuario == "":
             self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="Preencha os campos",
@@ -134,19 +147,21 @@ class Home(ft.View):
             return
 
 
-           if Categoria().adicionar(categoria,usuario):
-                 self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="CATEGORIA JÁ EXISTENTE ❌",
-                                                                      color="#FFFFFF",
-                                                                      weight="BOLD", 
-                                                                      text_align="center"),bgcolor="#d41e1e",
-                                                                          ))
-                
+           if Categoria().adicionar(categoria,id_usuario):
+                 self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="CATEGORIA CRIADA 👍",
+                                                                                                      color="#FFFFFF",
+                                                                                                      weight="BOLD", 
+                                                                                                      text_align="center"),bgcolor="#158000",
+                                                                                                          ))
+                 
            else:
-                self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="CATEGORIA CRIADA 👍",
-                                                                                     color="#FFFFFF",
-                                                                                     weight="BOLD", 
-                                                                                     text_align="center"),bgcolor="#158000",
-                                                                                         ))
+                 self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="CATEGORIA JÁ EXISTENTE ❌",
+                                                                                       color="#FFFFFF",
+                                                                                       weight="BOLD", 
+                                                                                       text_align="center"),bgcolor="#d41e1e",
+                                                                                           ))
+                                 
+                
                 
            
 
