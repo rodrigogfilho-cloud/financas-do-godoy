@@ -53,7 +53,7 @@ class LoginUsuarioView(ft.View):
                                     
                                     )
 
-        txt_cadastro = ft.Text(value="Já tem uma conta?",
+        txt_cadastro = ft.Text(value="Não tem uma conta?",
                             weight="BOLD",
                             bgcolor="transparent",
                             color="#302F2F")

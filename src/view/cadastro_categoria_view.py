@@ -1,5 +1,5 @@
 import flet as ft
-from src.view.login_usuario_view import LoginUsuarioView
+from src.model.categoria_model import Categoria
 
 
 class Home(ft.View):
@@ -18,7 +18,12 @@ class Home(ft.View):
 
         # Textos
 
-        bem_vindo = ft.Text(value=)
+        bem_vindo = ft.Text(value="BEM VINDO!!!",
+                            size=35,
+                            weight="BOLD",
+                            font_family="georgia",
+                            color="#fa1fca"
+                                                 )
 
         title = ft.Text(value="CADASTRE SUAS CATEGORIAS",
                         size=35,
@@ -59,20 +64,20 @@ class Home(ft.View):
         botao_add = ft.FloatingActionButton(icon=ft.Icons.ADD,
                                             bgcolor="#E765DC",
                                            hover_color="#C202B8",
-                                            width=80,
-                                            height=80)
+                                            width=50,
+                                            height=50)
 
         botao_recuperar = ft.FloatingActionButton(icon=ft.Icons.SEARCH,
                                                    bgcolor="#E765DC",
                                                     hover_color="#C202B8",
-                                                    width=80,
-                                                    height=80)
+                                                    width=50,
+                                                    height=50)
 
         botao_excluir = ft.FloatingActionButton(icon=ft.Icons.DELETE,
                                                  bgcolor="#E765DC",
                                                   hover_color="#C202B8",
-                                                width=80,
-                                                height=80)
+                                                width=50,
+                                                height=50)
 
         botao_nao_cadastrar = ft.Button(content=ft.Text(value='Pular etapa', weight="BOLD"),
                                         bgcolor="transparent", 
@@ -92,6 +97,7 @@ class Home(ft.View):
         
 
         self.controls = [
+            bem_vindo,
             title,
             linha_add,
             linha_rec,
