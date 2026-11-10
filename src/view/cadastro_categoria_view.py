@@ -83,7 +83,8 @@ class Home(ft.View):
                                         bgcolor="transparent", 
                                         elevation=0,
                                         color="#030303",
-                                        height=40,)
+                                        height=40,
+                                        on_click=self.ir_para_despesas)
 
         # Linhas e colunas
 
@@ -106,5 +107,15 @@ class Home(ft.View):
         ]
 
         # DEF´S
+
+        # Criação da def para ir para despesas, fazer isso depois
+
+    async def ir_para_despesas (self):
+                await self.pagina.push_route("/cadastro")
+
+    async def adicionar (self):
+           
+
+        
 
         
