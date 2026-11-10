@@ -20,7 +20,8 @@ def main(pagina:ft.Page):
             pagina.navigate('/desp_por_cat')
         elif item_clicado == 4:
             pagina.navigate('/login')
-    # Barra de navegação
+            
+    # Barras de navegações
 
     barra_navegacao_home = ft.NavigationBar(destinations=[ ft.NavigationBarDestination(icon=ft.Icons.CATEGORY_ROUNDED, 
                                         label="CATEGORIAS"),
@@ -112,37 +113,38 @@ def main(pagina:ft.Page):
                
             )
 
-    tela_cadastro_usuario = CadastroUsuarioView(pagina)
-    tela_login_usuario = LoginUsuarioView(pagina)
-    tela_principal = Principal(pagina)
-    tela_principal.navigation_bar = barra_navegacao_principal
-    tela_home = Home(pagina)
-    tela_home.navigation_bar = barra_navegacao_home
-    tela_add_despesa = Despesas(pagina)
-    tela_add_despesa.navigation_bar = barra_navegacao_add_despesa
-    tela_rec_despesas = DespesaPorCategoria(pagina)
-    tela_rec_despesas.navigation_bar = barra_todas_desp
-    tela_desp_p_cat = TodasDespesas(pagina)
-    tela_desp_p_cat.navigation_bar = barra_despesa_por_cat
+    
 
     def roteamento(e= None): 
         pagina.views.clear()
         
 
         if pagina.route == "/cadastro":
-            pagina.views.append(tela_cadastro_usuario)
+            tela_cadastro_usuario = CadastroUsuarioView(pagina)
+            pagina.navigate(tela_cadastro_usuario)
         elif pagina.route == "/login":
-            pagina.views.append(tela_login_usuario)
+            tela_login_usuario = LoginUsuarioView(pagina)
+            pagina.navigate(tela_login_usuario)
         elif pagina.route == "/home":
-            pagina.views.append(tela_home)
+            tela_home = Home(pagina)
+            tela_home.navigation_bar = barra_navegacao_home
+            pagina.navigate(tela_home)
         elif pagina.route == "/principal":
-            pagina.views.append(tela_principal)
+            tela_principal = Principal(pagina)
+            tela_principal.navigation_bar = barra_navegacao_principal
+            pagina.navigate(tela_principal)
         elif pagina.route == "/despesas":
-            pagina.views.append(tela_add_despesa)
+            tela_add_despesa = Despesas(pagina)
+            tela_add_despesa.navigation_bar = barra_navegacao_add_despesa
+            pagina.navigate(tela_add_despesa)
         elif pagina.route == "/desp_por_cat":
-            pagina.views.append(tela_rec_despesas)
+            tela_desp_p_cat = TodasDespesas(pagina)
+            tela_desp_p_cat.navigation_bar = barra_despesa_por_cat
+            pagina.navigate(tela_rec_despesas)
         elif pagina.route == "/all_despesas":
-            pagina.views.append(tela_desp_p_cat)
+            tela_rec_despesas = DespesaPorCategoria(pagina)
+            tela_rec_despesas.navigation_bar = barra_todas_desp
+            pagina.navigate(tela_desp_p_cat)
         
 
         pagina.update()
@@ -150,7 +152,7 @@ def main(pagina:ft.Page):
     pagina.on_route_change = roteamento
     roteamento()
 
-    pagina.views.append(tela_login_usuario)
+    pagina.views.append("/login")
 
 
 ft.run(main)

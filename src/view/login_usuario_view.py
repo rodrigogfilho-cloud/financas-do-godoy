@@ -101,10 +101,12 @@ class LoginUsuarioView(ft.View):
                         ))
                     return
 
+                resultado = Usuario().verificar(usuario,senha)
 
-                if Usuario().verificar(usuario, senha):
+                if resultado:
                       self.campo_login.value = ""
                       self.campo_senha.value = ""
+                      self.pagina.session.store.set("usuario_logado",resultado)
                       await self.pagina.push_route("/principal")
 
                 else:

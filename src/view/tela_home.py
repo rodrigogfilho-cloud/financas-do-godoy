@@ -5,9 +5,9 @@ class Principal(ft.View):
         super().__init__()
         self.pagina = pagina
 
-        
-
-    
+        dados_usuario = pagina.session.store.get("usuario_logado")
+        nome_do_infeliz = dados_usuario.get("login")
+     
 
         self.route = "/principal"
         self.bgcolor = "#2ed604"
@@ -16,7 +16,7 @@ class Principal(ft.View):
 
         # Textos
 
-        bem_vindo = ft.Text(value="BEM VINDOS AO GODOY FINANÇAS 💚",
+        bem_vindo = ft.Text(value=f"BEM VINDO {nome_do_infeliz} 💚",
                             size=35,
                             weight="BOLD",
                             font_family="georgia",
