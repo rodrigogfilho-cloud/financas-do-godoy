@@ -103,7 +103,7 @@ class LoginUsuarioView(ft.View):
 
 
                 if Usuario().verificar(usuario, senha):
-                      await self.pagina.push_route("/home")
+                      await self.pagina.push_route("/principal")
 
                 else:
                     self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="LOGIN OU SENHA INCORRETO",

@@ -10,7 +10,7 @@ class Principal(ft.View):
     
 
         self.route = "/principal"
-        self.bgcolor = "#eb9feb"
+        self.bgcolor = "#2ed604"
         self.vertical_alignment="center"
         self.horizontal_alignment="center"
 
@@ -20,7 +20,7 @@ class Principal(ft.View):
                             size=35,
                             weight="BOLD",
                             font_family="georgia",
-                            color="#fa1fca"
+                            color="#005504"
                                                  )
 
         self.controls = [bem_vindo]

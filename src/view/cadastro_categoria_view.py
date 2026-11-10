@@ -42,7 +42,7 @@ class Home(ft.View):
 
         # CAMPOS
 
-        self.campo_nome_usuario = ft.TextField(label='Usuário | Login',
+        self.campo_nome_usuario = ft.TextField(label='ID DO USUÁRIO',
                                             value='',
                                            bgcolor="#fdfdfdff", 
                                             color="#000000",
