@@ -103,9 +103,13 @@ class LoginUsuarioView(ft.View):
 
 
                 if Usuario().verificar(usuario, senha):
+                      self.campo_login.value = ""
+                      self.campo_senha.value = ""
                       await self.pagina.push_route("/principal")
 
                 else:
+                    self.campo_login.value = ""
+                    self.campo_senha.value = ""
                     self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="LOGIN OU SENHA INCORRETO",
                                           color="#FFFFFF",
                                           weight="BOLD", 

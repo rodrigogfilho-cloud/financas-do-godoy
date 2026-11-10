@@ -87,12 +87,16 @@ class CadastroUsuarioView(ft.View):
 
         # SNACKBAR MOSTRANDO QUE DEU CERTO
         if Usuario().cadastrar(usuario,senha):
+            self.campo_login.value =""
+            self.campo_senha.value =""
             self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value=f"Cadastrado efetuado com sucesso",
                                                                 color="#FFFFFF",
                                                                  weight="BOLD", 
                                                                  text_align="center"),bgcolor="#158000",
                                                                  ))
         else: 
+            self.campo_login.value =""
+            self.campo_senha.value =""
             self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="ERRO AO CADASTRAR",
                                                                 color="#FFFFFF",
                                                                 weight="BOLD",

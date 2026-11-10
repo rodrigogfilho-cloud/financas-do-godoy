@@ -16,11 +16,19 @@ class Principal(ft.View):
 
         # Textos
 
-        bem_vindo = ft.Text(value="PRINCIPAL",
+        bem_vindo = ft.Text(value="BEM VINDOS AO GODOY FINANÇAS 💚",
                             size=35,
                             weight="BOLD",
                             font_family="georgia",
                             color="#005504"
                                                  )
 
-        self.controls = [bem_vindo]
+        textinho = ft.Text(value="Ficamos muito felizes em ter você aqui. Acreditamos que cuidar do seu dinheiro não precisa ser complicado nem estressante. Por isso, preparamos uma plataforma simples, intuitiva e feita sob medida para ajudar você a organizar suas despesas, ter clareza sobre seus gastos e conquistar a tranquilidade financeira que você merece. Explore à vontade, conecte sua rotina financeira conosco e dê o primeiro passo para realizar seus objetivos. Estamos ao seu lado em cada etapa dessa jornada!",
+                           size=20,
+                            weight="BOLD",
+                            font_family="georgia",
+                            color="#FFFFFF",
+                            margin= 50)
+
+        self.controls = [bem_vindo,
+                         textinho]
