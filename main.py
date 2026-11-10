@@ -1,7 +1,7 @@
 import flet as ft
 from src.view.cadastro_usuario_view import CadastroUsuarioView
 from src.view.login_usuario_view import LoginUsuarioView
-from src.view.tela_principal_view import Home
+from src.view.cadastro_categoria_view import Home
 
 def main(pagina:ft.Page):
     tela_cadastro_usuario = CadastroUsuarioView(pagina)
