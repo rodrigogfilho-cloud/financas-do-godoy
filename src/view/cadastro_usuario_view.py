@@ -73,7 +73,7 @@ class CadastroUsuarioView(ft.View):
                          coluna_de_botoes]
         
     def cadastrar(self):
-
+        
         usuario = self.campo_login.value
         senha = self.campo_senha.value
 
@@ -87,7 +87,7 @@ class CadastroUsuarioView(ft.View):
 
         # SNACKBAR MOSTRANDO QUE DEU CERTO
         if Usuario().cadastrar(usuario,senha):
-            self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="Cadastrado efetuado com sucesso",
+            self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value=f"Cadastrado efetuado com sucesso",
                                                                 color="#FFFFFF",
                                                                  weight="BOLD", 
                                                                  text_align="center"),bgcolor="#158000",

@@ -5,7 +5,7 @@ class Categoria:
         pass
     
     @staticmethod
-    def adicionar (categoria:str, id_usuario:int) -> int:
+    def adicionar (categoria:str, login:str) -> int:
 
         conexao, cursor = Conexao().conectar()
                 
@@ -15,10 +15,10 @@ class Categoria:
 
         try:
             cursor.execute("""
-                    INSERT INTO tb_categorias(tipo, id_usuario)
+                    INSERT INTO tb_categorias(tipo, login)
                     VALUES (%s, %s);
                         """,
-                [categoria, id_usuario])
+                [categoria, login])
         
             conexao.commit()
             id_categoria= cursor.lastrowid # Ultimo id cadastrado nas categorias
@@ -30,7 +30,7 @@ class Categoria:
             return None
 
     @staticmethod
-    def recuperar(login:int) -> list:
+    def recuperar(login:str) -> list:
 
         conexao, cursor = Conexao().conectar()
         
@@ -40,7 +40,7 @@ class Categoria:
                 
         cursor.execute("""
                         select tipo, id_categoria from tb_categorias
-                        where id_usuario = %s;
+                        where login = %s;
         
                         """,
                     [login])
@@ -51,7 +51,7 @@ class Categoria:
         
         return resultado
     @staticmethod
-    def excluir (id_categoria:int) -> bool:
+    def excluir (id_categoria:str) -> bool:
 
         conexao, cursor = Conexao().conectar()
 
@@ -61,7 +61,7 @@ class Categoria:
         try:                
             cursor.execute("""
                         DELETE FROM tb_categorias 
-                        WHERE id_categoria = %s;
+                        WHERE tipo = %s;
                             ;
                 
                         """,
