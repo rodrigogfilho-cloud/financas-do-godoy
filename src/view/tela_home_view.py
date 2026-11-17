@@ -17,7 +17,7 @@ class Principal(ft.View):
 
         # Textos
 
-        bem_vindo = ft.Text(value=f"BEM VINDO {nome_do_infeliz} ! 💚",
+        bem_vindo = ft.Text(value=f"Bem Vindo {nome_do_infeliz} ! 💚",
                             size=35,
                             weight="BOLD",
                             font_family="georgia",

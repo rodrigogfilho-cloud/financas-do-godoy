@@ -25,7 +25,7 @@ class Despesas(ft.View):
                             color="#8000a0"
                                                  )
 
-        textinho_id = ft.Text(value=f"Cada usuario contém seu ID para fazer cadastros de categorias e despesas. Seu ID Usuário é : {id_do_infeliz}. ",
+        textinho_id = ft.Text(value=f"Seu ID Usuário é : {id_do_infeliz}. ",
                                    size=20,
                                     weight="BOLD",
                                     font_family="georgia",

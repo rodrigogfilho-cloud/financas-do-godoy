@@ -9,7 +9,7 @@ class Home(ft.View):
 
         dados_usuario = pagina.session.store.get("usuario_logado")
                 
-        id_do_infeliz = dados_usuario.get("id_usuario")
+        self.id_usuario = dados_usuario.get("id_usuario")
 
     
 
@@ -18,14 +18,13 @@ class Home(ft.View):
         self.vertical_alignment="center"
         self.horizontal_alignment="center"
 
+        # Lista 
+
+        categorias = []
+
         # Textos
 
-        bem_vindo = ft.Text(value="BEM VINDO!!!",
-                            size=35,
-                            weight="BOLD",
-                            font_family="georgia",
-                            color="#fa1fca"
-                                                 )
+     
 
         title = ft.Text(value="CADASTRE SUAS CATEGORIAS",
                         size=35,
@@ -42,7 +41,7 @@ class Home(ft.View):
                                                     color="#302F2F",
                                                    )
 
-        textinho_id = ft.Text(value=f"Cada usuario contém seu ID para fazer cadastros de categorias e despesas. Seu ID Usuário é : {id_do_infeliz}. ",
+        textinho_id = ft.Text(value=f"Seu ID Usuário é : {self.id_usuario}. ",
                                            size=20,
                                             weight="BOLD",
                                             font_family="georgia",
@@ -53,7 +52,7 @@ class Home(ft.View):
         # CAMPOS
 
         self.campo_nome_usuario = ft.TextField(label='ID DO USUÁRIO',
-                                            value='',
+                                            value=self.id_usuario,
                                            bgcolor="#fdfdfdff", 
                                             color="#000000",
                                         )
@@ -64,17 +63,7 @@ class Home(ft.View):
                                     color="#000000",
                                 )
 
-        self.campo_recuperar_categorias = ft.TextField(label='Recuperar categorias',
-                                                  value='',
-                                                  bgcolor="#fdfdfdff", 
-                                                  color="#000000",
-                                                  )
-
-        self.campo_excluir_categoria = ft.TextField(label='Qual Categoria você deseja excluir?',
-                                               value='',
-                                                bgcolor="#fdfdfdff", 
-                                                color="#000000",)
-
+       
         # BOTÕES
 
         botao_add = ft.FloatingActionButton(icon=ft.Icons.ADD,
@@ -84,17 +73,7 @@ class Home(ft.View):
                                             height=50,
                                             on_click=self.adicionar,)
 
-        botao_recuperar = ft.FloatingActionButton(icon=ft.Icons.SEARCH,
-                                                   bgcolor="#E765DC",
-                                                    hover_color="#C202B8",
-                                                    width=50,
-                                                    height=50)
-
-        botao_excluir = ft.FloatingActionButton(icon=ft.Icons.DELETE,
-                                                 bgcolor="#E765DC",
-                                                  hover_color="#C202B8",
-                                                width=50,
-                                                height=50)
+        
 
         botao_nao_cadastrar = ft.Button(content=ft.Text(value='Pular etapa', weight="BOLD"),
                                         bgcolor="transparent", 
@@ -105,23 +84,25 @@ class Home(ft.View):
 
         # Linhas e colunas
 
-        linha_add = ft.Row(controls=[self.campo_adicionar_categoria, botao_add],alignment="center")
+        coluna_add = ft.Column(controls=[self.campo_adicionar_categoria, botao_add],alignment="center",
+                               horizontal_alignment=ft.CrossAxisAlignment.CENTER)
 
-        linha_rec = ft.Row(controls=[self.campo_recuperar_categorias, botao_recuperar],alignment="center")
+        # Histórico
 
-        linha_delete = ft.Row(controls=[self.campo_excluir_categoria, botao_excluir],alignment="center")
+
+
+      
+        # Linha para pular
 
         linha_pular_etapa =ft.Row(controls=[texto_de_nao_cadastrar_categoria, botao_nao_cadastrar],alignment="center")
         
 
         self.controls = [
-            bem_vindo,
+           
             title,
             textinho_id,
             self.campo_nome_usuario,
-            linha_add,
-            linha_rec,
-            linha_delete,
+           coluna_add,
             linha_pular_etapa
         ]
 
@@ -154,17 +135,12 @@ class Home(ft.View):
                                                                                                       text_align="center"),bgcolor="#158000",
                                                                                                           ))
                  
+                 
            else:
                  self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="CATEGORIA JÁ EXISTENTE ❌",
                                                                                        color="#FFFFFF",
                                                                                        weight="BOLD", 
                                                                                        text_align="center"),bgcolor="#d41e1e",
                                                                                            ))
-                                 
-                
-                
-           
 
-        
-
-        
+   
