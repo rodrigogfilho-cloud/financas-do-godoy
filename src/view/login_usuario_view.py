@@ -53,7 +53,7 @@ class LoginUsuarioView(ft.View):
                                     
                                     )
 
-        txt_cadastro = ft.Text(value="Já tem uma conta?",
+        txt_cadastro = ft.Text(value="Não tem uma conta?",
                             weight="BOLD",
                             bgcolor="transparent",
                             color="#302F2F")
@@ -79,6 +79,8 @@ class LoginUsuarioView(ft.View):
             botao_login,
             linha_botoes]
 
+       
+
         # DEF´s
    
 
@@ -99,11 +101,17 @@ class LoginUsuarioView(ft.View):
                         ))
                     return
 
+                resultado = Usuario().verificar(usuario,senha)
 
-                if Usuario().verificar(usuario, senha):
-                      await self.pagina.push_route("/home")
+                if resultado:
+                      self.campo_login.value = ""
+                      self.campo_senha.value = ""
+                      self.pagina.session.store.set("usuario_logado",resultado)
+                      await self.pagina.push_route("/principal")
 
                 else:
+                    self.campo_login.value = ""
+                    self.campo_senha.value = ""
                     self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="LOGIN OU SENHA INCORRETO",
                                           color="#FFFFFF",
                                           weight="BOLD", 
