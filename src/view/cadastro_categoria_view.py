@@ -35,6 +35,8 @@ class Home(ft.View):
                      
                         )
 
+       
+
         
 
         self.texto_de_nao_cadastrar_categoria = ft.Text(value="Não deseja cadastrar uma categoria?",
@@ -68,6 +70,12 @@ class Home(ft.View):
                                     color="#000000",
                                 )
 
+        self.campo_excluir_categoria = ft.TextField(label='Categoria que deseja excluir',
+                                    value='',
+                                   bgcolor="#fdfdfdff", 
+                                    color="#000000",
+                                )
+
         
 
        
@@ -79,6 +87,8 @@ class Home(ft.View):
                                             width=50,
                                             height=50,
                                             on_click=self.adicionar,)
+
+        
 
         
 
@@ -96,12 +106,17 @@ class Home(ft.View):
 
         # Histórico
 
-        coluna_lista_categorias= ft.Column(controls=self.lista_categorias)
+        coluna_lista_categorias= ft.Column(controls=self.lista_categorias,
+                                           alignment="center",
+                                           height=540,
+                                           scroll=ft.ScrollMode.ADAPTIVE)
 
       
         # Linha para pular etapa
 
         self.linha_pular_etapa =ft.Row(controls=[self.texto_de_nao_cadastrar_categoria, botao_nao_cadastrar],alignment="center")
+
+        # 
 
         self.atualizar_lista_categorias()
 
@@ -109,9 +124,7 @@ class Home(ft.View):
            
             self.title,
             self.textinho_id,
-           self.coluna_add,
-           self.title_historico,
-            coluna_lista_categorias,
+           self.coluna_add,self.title_historico,coluna_lista_categorias,
             self.linha_pular_etapa,
         ]
 
@@ -159,7 +172,29 @@ class Home(ft.View):
         for categoria in categorias:
             nome_categoria = categoria.get("tipo")
             texto = ft.Text(value=nome_categoria)
-            self.lista_categorias.append(texto)
+            id_categoria = categoria.get('id_categoria')
+            botao_delete = ft.FloatingActionButton(icon=ft.Icons.DELETE,
+                                                                    bgcolor="#E765DC",
+                                                                   hover_color="#C202B8",
+                                                                    width=50,
+                                                                    height=50,
+                                                                    on_click=lambda e, id_cat=id_categoria: self.excluir_categoria(id_cat), key=id_categoria,
+                                            tooltip='Excluir Categoria'
+                                                                    )
+            linha = ft.Row(controls=[texto,botao_delete],
+                           alignment="CENTER",
+                         )
+            
+            
+            self.lista_categorias.append(linha)
+
+            
 
         self.pagina.update()
+
+
+    def excluir_categoria(self,excluir):
+        Categoria().excluir(id_categoria=excluir)
+        self.lista_categorias.clear()
+        self.atualizar_lista_categorias()
             
