@@ -9,25 +9,24 @@ class Home(ft.View):
 
         dados_usuario = pagina.session.store.get("usuario_logado")
                 
-        id_do_infeliz = dados_usuario.get("id_usuario")
+        self.id_usuario = dados_usuario.get("id_usuario")
 
-    
+        # Lista 
+        
+        self.lista_categorias = []
 
         self.route = "/home"
         self.bgcolor = "#eb9feb"
         self.vertical_alignment="center"
         self.horizontal_alignment="center"
 
+        
+
         # Textos
 
-        bem_vindo = ft.Text(value="BEM VINDO!!!",
-                            size=35,
-                            weight="BOLD",
-                            font_family="georgia",
-                            color="#fa1fca"
-                                                 )
+     
 
-        title = ft.Text(value="CADASTRE SUAS CATEGORIAS",
+        self.title = ft.Text(value="CADASTRE SUAS CATEGORIAS",
                         size=35,
                         margin=5,
                         weight="BOLD",
@@ -36,27 +35,34 @@ class Home(ft.View):
                      
                         )
 
-        texto_de_nao_cadastrar_categoria = ft.Text(value="Não deseja cadastrar uma categoria?",
+       
+
+        
+
+        self.texto_de_nao_cadastrar_categoria = ft.Text(value="Não deseja cadastrar uma categoria?",
                                                    weight="BOLD",
                                                     bgcolor="transparent",
                                                     color="#302F2F",
                                                    )
 
-        textinho_id = ft.Text(value=f"Cada usuario contém seu ID para fazer cadastros de categorias e despesas. Seu ID Usuário é : {id_do_infeliz}. ",
+        self.textinho_id = ft.Text(value=f"Seu ID Usuário é : {self.id_usuario}. ",
                                            size=20,
                                             weight="BOLD",
                                             font_family="georgia",
                                             color="#FFFFFF",
-                                            margin= 50,
+                                            margin= 10,
                                             )
+
+        self.title_historico = ft.Text(value="Categorias Registradas:",
+                                           size=20,
+                                            weight="BOLD",
+                                            font_family="georgia",
+                                            color="#FFFFFF",
+                                           )
 
         # CAMPOS
 
-        self.campo_nome_usuario = ft.TextField(label='ID DO USUÁRIO',
-                                            value='',
-                                           bgcolor="#fdfdfdff", 
-                                            color="#000000",
-                                        )
+      
 
         self.campo_adicionar_categoria = ft.TextField(label='Categoria',
                                     value='',
@@ -64,17 +70,15 @@ class Home(ft.View):
                                     color="#000000",
                                 )
 
-        self.campo_recuperar_categorias = ft.TextField(label='Recuperar categorias',
-                                                  value='',
-                                                  bgcolor="#fdfdfdff", 
-                                                  color="#000000",
-                                                  )
+        self.campo_excluir_categoria = ft.TextField(label='Categoria que deseja excluir',
+                                    value='',
+                                   bgcolor="#fdfdfdff", 
+                                    color="#000000",
+                                )
 
-        self.campo_excluir_categoria = ft.TextField(label='Qual Categoria você deseja excluir?',
-                                               value='',
-                                                bgcolor="#fdfdfdff", 
-                                                color="#000000",)
+        
 
+       
         # BOTÕES
 
         botao_add = ft.FloatingActionButton(icon=ft.Icons.ADD,
@@ -84,17 +88,9 @@ class Home(ft.View):
                                             height=50,
                                             on_click=self.adicionar,)
 
-        botao_recuperar = ft.FloatingActionButton(icon=ft.Icons.SEARCH,
-                                                   bgcolor="#E765DC",
-                                                    hover_color="#C202B8",
-                                                    width=50,
-                                                    height=50)
+        
 
-        botao_excluir = ft.FloatingActionButton(icon=ft.Icons.DELETE,
-                                                 bgcolor="#E765DC",
-                                                  hover_color="#C202B8",
-                                                width=50,
-                                                height=50)
+        
 
         botao_nao_cadastrar = ft.Button(content=ft.Text(value='Pular etapa', weight="BOLD"),
                                         bgcolor="transparent", 
@@ -105,66 +101,102 @@ class Home(ft.View):
 
         # Linhas e colunas
 
-        linha_add = ft.Row(controls=[self.campo_adicionar_categoria, botao_add],alignment="center")
+        self.coluna_add = ft.Row(controls=[self.campo_adicionar_categoria, botao_add],alignment="center",
+                               )
 
-        linha_rec = ft.Row(controls=[self.campo_recuperar_categorias, botao_recuperar],alignment="center")
+        # Histórico
 
-        linha_delete = ft.Row(controls=[self.campo_excluir_categoria, botao_excluir],alignment="center")
+        coluna_lista_categorias= ft.Column(controls=self.lista_categorias,
+                                           alignment="center",
+                                           height=540,
+                                           scroll=ft.ScrollMode.ADAPTIVE)
 
-        linha_pular_etapa =ft.Row(controls=[texto_de_nao_cadastrar_categoria, botao_nao_cadastrar],alignment="center")
-        
+      
+        # Linha para pular etapa
+
+        self.linha_pular_etapa =ft.Row(controls=[self.texto_de_nao_cadastrar_categoria, botao_nao_cadastrar],alignment="center")
+
+        # 
+
+        self.atualizar_lista_categorias()
 
         self.controls = [
-            bem_vindo,
-            title,
-            textinho_id,
-            self.campo_nome_usuario,
-            linha_add,
-            linha_rec,
-            linha_delete,
-            linha_pular_etapa
+           
+            self.title,
+            self.textinho_id,
+           self.coluna_add,self.title_historico,coluna_lista_categorias,
+            self.linha_pular_etapa,
         ]
 
         # DEF´S
 
-        # Criação da def para ir para despesas, fazer isso depois
+        # Criação da def para ir para despesas, fazer isso depois > Feito
 
     async def ir_para_despesas (self):
-                await self.pagina.push_route("/despesas")
+            await self.pagina.push_route("/despesas")
 
-    async def adicionar (self):
-           categoria = self.campo_adicionar_categoria.value
-           usuario = self.campo_nome_usuario.value
-           id_usuario = int(usuario)
+    def adicionar (self):
+
+           
+            categoria = self.campo_adicionar_categoria.value
+            
            
 
-           if categoria == "" or usuario == "":
-            self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="Preencha os campos",
+            if categoria == "":
+                self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="Preencha os campos",
                                color="#FFFFFF",
                                weight="BOLD", 
                                text_align="center"),bgcolor="#fce51c",
                                    ))
-            return
+
+                
+                return
 
 
-           if Categoria().adicionar(categoria,id_usuario):
-                 self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="CATEGORIA CRIADA 👍",
+            if Categoria().adicionar(categoria,self.id_usuario):
+                self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="CATEGORIA CRIADA 👍",
                                                                                                       color="#FFFFFF",
                                                                                                       weight="BOLD", 
                                                                                                       text_align="center"),bgcolor="#158000",
                                                                                                           ))
-                 
-           else:
-                 self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value="CATEGORIA JÁ EXISTENTE ❌",
-                                                                                       color="#FFFFFF",
-                                                                                       weight="BOLD", 
-                                                                                       text_align="center"),bgcolor="#d41e1e",
-                                                                                           ))
-                                 
-                
-                
-           
+                self.pagina.update()
+                self.lista_categorias.clear()
 
-        
+                                                                                                          
+            self.atualizar_lista_categorias()
 
-        
+
+    def atualizar_lista_categorias(self):
+        categorias = Categoria().recuperar(self.id_usuario)
+
+        for categoria in categorias:
+            nome_categoria = categoria.get("tipo")
+            texto = ft.Text(value=nome_categoria)
+            id_categoria = categoria.get('id_categoria')
+            botao_delete = ft.FloatingActionButton(icon=ft.Icons.DELETE,
+                                                                    bgcolor="#E765DC",
+                                                                   hover_color="#C202B8",
+                                                                    width=50,
+                                                                    height=50,
+                                                                    on_click=lambda e, id_cat=id_categoria: self.excluir_categoria(id_cat), key=id_categoria, # o key é uma variavel para o pegar o id_categoria, para quando eu for excluir, excluir a categoria que desejo excluir
+                                            tooltip='Excluir Categoria'
+                                                                    )
+            linha = ft.Row(controls=[texto,botao_delete],
+                           alignment="CENTER",
+                         )
+            
+            
+            self.lista_categorias.append(linha)
+
+            
+
+        self.pagina.update()
+
+
+
+
+    def excluir_categoria(self,excluir): # O parâmetro excluir serve para receber o identificador (ID) da categoria que você deseja apagar.
+        Categoria().excluir(id_categoria=excluir) #Excluo a categoria
+        self.lista_categorias.clear() # Limpo lista
+        self.atualizar_lista_categorias() # E chamo/atualizo a lista para chamar ela sem a categoria que eu removi
+            
