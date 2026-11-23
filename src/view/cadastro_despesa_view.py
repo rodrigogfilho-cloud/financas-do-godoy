@@ -80,21 +80,23 @@ class Despesas(ft.View):
 
         # DEF´s
 
-    def incluir (self):
-
+    def incluir(self):
         # Pegar os valores dos campos
-
         descricao = self.descricao.value
         valor = self.valor.value
         data = self.data.value
         id_categoria = self.campo_categorias.value
 
         data_convertida = datetime.strptime(data, "%d/%m/%Y").date()
+        valor1 = float(valor.replace(",", ".")) # garante que funcione mesmo se digitar vírgula
 
-        valor1 = float(valor)
+        # Envio para meu model na ORDEM CORRETA:
+        # (login, descricao, valor, data, id_categoria)
+        resultado = Despesa().incluir(self.id_usuario, descricao, valor1, data_convertida, id_categoria)
 
-        # ---------------------------------------------------------------------- #
-
-        # Envio para meu model para inserir no banco de dados
-
-        Despesa().incluir(self.id_usuario,id_categoria,descricao,valor1,data_convertida)
+        if resultado:
+            self.pagina.show_dialog(ft.SnackBar(content=ft.Text(value=f"Despesa cadastrada",
+                                                                            color="#FFFFFF",
+                                                                             weight="BOLD", 
+                                                                             text_align="center"),bgcolor="#158000",
+                                                                             ))
