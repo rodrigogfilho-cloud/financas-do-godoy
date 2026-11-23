@@ -5,7 +5,7 @@ from src.view.cadastro_categoria_view import Home
 from src.view.tela_home_view import Principal
 from src.view.cadastro_despesa_view import Despesas
 from src.view.despesa_por_categoria_view import DespesaPorCategoria
-from src.view.todas_despesas_view import TodasDespesas
+from src.view.tela_despesa_view import TodasDespesas
 def main(pagina:ft.Page):
 
     def navegacao(componente = None):
@@ -139,11 +139,11 @@ def main(pagina:ft.Page):
             tela_add_despesa = Despesas(pagina)
             tela_add_despesa.navigation_bar = barra_navegacao_add_despesa
             pagina.views.append(tela_add_despesa)
-        elif pagina.route == "/desp_por_cat":
+        elif pagina.route == "/all_despesas":
             tela_desp_p_cat = TodasDespesas(pagina)
             tela_desp_p_cat.navigation_bar = barra_despesa_por_cat
             pagina.views.append(tela_desp_p_cat)
-        elif pagina.route == "/all_despesas":
+        elif pagina.route == "/desp_por_cat":
             tela_rec_despesas = DespesaPorCategoria(pagina)
             tela_rec_despesas.navigation_bar = barra_todas_desp
             pagina.views.append(tela_rec_despesas)
