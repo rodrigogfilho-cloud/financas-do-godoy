@@ -178,7 +178,7 @@ class Home(ft.View):
                                                                    hover_color="#C202B8",
                                                                     width=50,
                                                                     height=50,
-                                                                    on_click=lambda e, id_cat=id_categoria: self.excluir_categoria(id_cat), key=id_categoria,
+                                                                    on_click=lambda e, id_cat=id_categoria: self.excluir_categoria(id_cat), key=id_categoria, # o key é uma variavel para o pegar o id_categoria, para quando eu for excluir, excluir a categoria que desejo excluir
                                             tooltip='Excluir Categoria'
                                                                     )
             linha = ft.Row(controls=[texto,botao_delete],
@@ -193,7 +193,9 @@ class Home(ft.View):
         self.pagina.update()
 
 
-    def excluir_categoria(self,excluir):
+
+
+    def excluir_categoria(self,excluir): # O parâmetro excluir serve para receber o identificador (ID) da categoria que você deseja apagar.
         Categoria().excluir(id_categoria=excluir)
         self.lista_categorias.clear()
         self.atualizar_lista_categorias()

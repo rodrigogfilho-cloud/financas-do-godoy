@@ -74,7 +74,7 @@ def main(pagina:ft.Page):
                                                         ),
                                                         
                                                         ],on_change=navegacao,
-                                                        bgcolor= "#8000a0",
+                                                        bgcolor= "#e9adf8",
                                                     
                
             )
