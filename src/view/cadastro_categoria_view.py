@@ -101,8 +101,8 @@ class Home(ft.View):
 
         # Linhas e colunas
 
-        self.coluna_add = ft.Column(controls=[self.campo_adicionar_categoria, botao_add],alignment="center",
-                               horizontal_alignment=ft.CrossAxisAlignment.CENTER)
+        self.coluna_add = ft.Row(controls=[self.campo_adicionar_categoria, botao_add],alignment="center",
+                               )
 
         # Histórico
 
@@ -196,7 +196,7 @@ class Home(ft.View):
 
 
     def excluir_categoria(self,excluir): # O parâmetro excluir serve para receber o identificador (ID) da categoria que você deseja apagar.
-        Categoria().excluir(id_categoria=excluir)
-        self.lista_categorias.clear()
-        self.atualizar_lista_categorias()
+        Categoria().excluir(id_categoria=excluir) #Excluo a categoria
+        self.lista_categorias.clear() # Limpo lista
+        self.atualizar_lista_categorias() # E chamo/atualizo a lista para chamar ela sem a categoria que eu removi
             
