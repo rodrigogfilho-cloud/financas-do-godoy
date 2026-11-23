@@ -11,7 +11,12 @@ class TodasDespesas(ft.View):
         self.id_usuario = dados_usuario.get("id_usuario")
 
         
-        todas_as_despesas = []
+        self.todas_as_despesas = []
+
+        despesas = Despesa().recuperar(self.id_usuario)
+
+        for x in despesas:
+            opcao = 
     
 
         self.route = "/all_despesas"
@@ -30,15 +35,15 @@ class TodasDespesas(ft.View):
 
         # Historico
 
+
+
         tabela_despesas = ft.DataTable(columns=[ft.DataColumn(label="ID DAS DESPESAS"),
                                                 ft.DataColumn(label="DESCRIÇÃO"),
                                                 ft.DataColumn(label="CATEGORIA"),
                                                 ft.DataColumn(label="VALOR"),
                                                 ft.DataColumn(label="DATA"),],
                                                 rows=[
-                                                    ft.DataRow(cells=[
-
-                                                    ])
+                                                    ft.DataRow(cells=self.todas_as_despesas)
                                                 ])
 
 
@@ -56,3 +61,5 @@ class TodasDespesas(ft.View):
         self.controls = [txt,
                          tabela_despesas
                          ]
+
+    
