@@ -4,7 +4,7 @@ class Despesa:
     def __init__(self):
         pass
     @staticmethod
-    def incluir (login:int, descricao:str , valor:float,   id_categoria:int = None) -> int:
+    def incluir (login:int, descricao:str , valor:float,  data:str,id_categoria:int = None) -> int:
      
         conexao, cursor = Conexao().conectar()
                 
@@ -14,10 +14,10 @@ class Despesa:
         
         try:
             cursor.execute("""
-                    INSERT INTO tb_despesas(id_usuario, descricao, valor ,id_categoria)
-                    VALUES (%s, %s, %s, %s);
+                    INSERT INTO tb_despesas(id_usuario, descricao, valor ,id_categoria, data)
+                    VALUES (%s, %s, %s, %s, %s);
                         """,
-                [login, descricao, valor, id_categoria ])
+                [login, descricao, valor, id_categoria, data ])
         
             conexao.commit()
             conexao.close()
