@@ -78,7 +78,9 @@ class TodasDespesas(ft.View):
                          ]
 
     def atualizar_despesas(self):
+        self.lista_despesas.clear()
         despesas = Despesa().recuperar(self.id_usuario)
+       
 
         for despesa in despesas:
             linha = ft.DataRow(
@@ -94,7 +96,8 @@ class TodasDespesas(ft.View):
                     ft.DataCell(ft.Text(str(despesa.get("data")),
                                         text_align="center", color="#FFFFFF", weight="BOLD")),
 
-                    ft.DataCell(ft.FloatingActionButton(icon=ft.Icons.DELETE,
+                    ft.DataCell(ft.IconButton(icon=ft.Icons.DELETE,
+                                                        key=despesa.get("id_despesa"),
                                                              height=40,
                                                              width=40,
                                                              bgcolor="#F7BD7B",
@@ -104,12 +107,15 @@ class TodasDespesas(ft.View):
                 ],
                 
             )
+
             self.lista_despesas.append(linha)
             
         self.pagina.update()
 
-    def excluir_despesa(self):
-           
+    def excluir_despesa(self, botao):
+        id_despesa = botao.control.key
+        Despesa().excluir(id_despesa)
+        self.atualizar_despesas()
                   
 
             
