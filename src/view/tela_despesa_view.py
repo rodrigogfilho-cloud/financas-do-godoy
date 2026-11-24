@@ -1,6 +1,7 @@
 import flet as ft
 from src.model.despesa_model import Despesa
 
+
 class TodasDespesas(ft.View):
     def __init__(self, pagina:ft.Page):
         super().__init__()
@@ -11,17 +12,15 @@ class TodasDespesas(ft.View):
         self.id_usuario = dados_usuario.get("id_usuario")
 
         
-        self.todas_as_despesas = []
+        self.lista_despesas = []
 
-        despesas = Despesa().recuperar(self.id_usuario)
-
-        for x in despesas:
-            opcao = 
+        
+            
     
 
         self.route = "/all_despesas"
         self.bgcolor = "#ceb095"
-        self.vertical_alignment="center"
+        # self.vertical_alignment="center"
         self.horizontal_alignment="center"
 
         # Textos
@@ -37,14 +36,36 @@ class TodasDespesas(ft.View):
 
 
 
-        tabela_despesas = ft.DataTable(columns=[ft.DataColumn(label="ID DAS DESPESAS"),
-                                                ft.DataColumn(label="DESCRIÇÃO"),
-                                                ft.DataColumn(label="CATEGORIA"),
-                                                ft.DataColumn(label="VALOR"),
-                                                ft.DataColumn(label="DATA"),],
-                                                rows=[
-                                                    ft.DataRow(cells=self.todas_as_despesas)
-                                                ])
+        tabela_despesas = ft.DataTable(columns=[ft.DataColumn(ft.Text(value="ID DAS DESPESAS",
+        color="#ffffff",
+        weight="BOLD",
+        size=20)),
+                                                ft.DataColumn(ft.Text(value="DESCRIÇÃO",
+                                                color="#ffffff",
+                                                weight="BOLD",
+                                                size=20)),
+                                                ft.DataColumn(ft.Text(value="CATEGORIA",
+                                                color="#ffffff",
+                                                weight="BOLD",
+                                                size=20)),
+                                                ft.DataColumn(ft.Text(value="VALOR",
+                                                color="#ffffff",
+                                                weight="BOLD",
+                                                size=20)),
+                                                ft.DataColumn(ft.Text(value="DATA",
+                                                color="#ffffff",
+                                                weight="BOLD",
+                                                size=20)),],
+                                                rows=self.lista_despesas,
+
+                                              
+                                                
+                                                    )
+
+
+        despesas = Despesa().recuperar(self.id_usuario)
+        
+                # for x in despesas:
 
 
 
@@ -56,10 +77,33 @@ class TodasDespesas(ft.View):
                                                         width=50,
                                                         height=50,)
 
-        
+        self.atualizar_despesas()
 
         self.controls = [txt,
                          tabela_despesas
                          ]
+
+    def atualizar_despesas(self):
+        despesas = Despesa().recuperar(self.id_usuario)
+
+        for despesa in despesas:
+            linha = ft.DataRow(
+                cells=[
+                    ft.DataCell(ft.Text(despesa.get("id_despesa",),
+                                        text_align="center", color="#FFFFFF", weight="BOLD")),
+                    ft.DataCell(ft.Text(despesa.get("descricao"),
+                                        text_align="center", color="#FFFFFF",weight="BOLD")),
+                    ft.DataCell(ft.Text(despesa.get("id_categoria"),
+                                        text_align="center", color="#FFFFFF",weight="BOLD")),
+                    ft.DataCell(ft.Text(despesa.get("valor"),
+                                        text_align="center", color="#FFFFFF",weight="BOLD")),
+                    ft.DataCell(ft.Text(despesa.get("data"),
+                                        text_align="center", color="#FFFFFF", weight="BOLD")),
+                ]
+            )
+
+            self.lista_despesas.append(linha)
+
+        self.pagina.update()
 
     

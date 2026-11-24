@@ -36,7 +36,7 @@ class Despesa:
             return None
         try:        
             cursor.execute("""
-                            select id_despesa, descricao, valor, data, hora, id_categoria from tb_despesas
+                            select id_despesa, descricao, valor, data, id_categoria from tb_despesas
                             where id_usuario = %s
             
                             """,
@@ -60,7 +60,7 @@ class Despesa:
             return None
         try:        
             cursor.execute("""
-                            select id_despesa ,descricao, id_usuario, valor, data, hora, id_categoria from tb_despesas
+                            select id_despesa ,descricao, id_usuario, valor, data, id_categoria from tb_despesas
                             where id_usuario = %s
                             and id_categoria = %s;
             
