@@ -31,6 +31,7 @@ class TodasDespesas(ft.View):
                             font_family="georgia",
                             color="#E67E08"
                                                  )
+        
 
         # Historico
 
