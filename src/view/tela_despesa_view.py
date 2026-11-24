@@ -62,20 +62,7 @@ class TodasDespesas(ft.View):
                                                 
                                                     )
 
-
-        despesas = Despesa().recuperar(self.id_usuario)
         
-                # for x in despesas:
-
-
-
-        # Botões
-
-        botao_excluir_despesa = ft.FloatingActionButton(icon=ft.Icons.DELETE,
-                                                        bgcolor="#F7BD7B",
-                                                        hover_color="#D16500",
-                                                        width=50,
-                                                        height=50,)
 
         self.atualizar_despesas()
 
@@ -97,10 +84,14 @@ class TodasDespesas(ft.View):
                                         text_align="center", color="#FFFFFF",weight="BOLD")),
                     ft.DataCell(ft.Text(despesa.get("valor"),
                                         text_align="center", color="#FFFFFF",weight="BOLD")),
-                    ft.DataCell(ft.Text(despesa.get("data"),
+                    ft.DataCell(ft.Text(str(despesa.get("data")),
                                         text_align="center", color="#FFFFFF", weight="BOLD")),
-                ]
+                    
+                ],
+                
             )
+
+          
 
             self.lista_despesas.append(linha)
 
