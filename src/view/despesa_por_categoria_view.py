@@ -96,15 +96,15 @@ class DespesaPorCategoria(ft.View):
             linha = ft.DataRow(
                 cells=[
                     ft.DataCell(ft.Text(str(despesa.get("id_despesa",
-                                        text_align="center", color="#FFFFFF", weight="BOLD")))),
+                                        )),text_align="center", color="#FFFFFF", weight="BOLD")),
                     ft.DataCell(ft.Text(despesa.get("descricao",
-                                        text_align="center", color="#FFFFFF", weight="BOLD"))),
+                                        ),text_align="center", color="#FFFFFF", weight="BOLD")),
                     ft.DataCell(ft.Text(despesa.get("tipo",
-                                        text_align="center", color="#FFFFFF", weight="BOLD"))),
+                                        ),text_align="center", color="#FFFFFF", weight="BOLD")),
                     ft.DataCell(ft.Text(str(despesa.get("valor",
-                                        text_align="center", color="#FFFFFF", weight="BOLD")))),
+                                        )),text_align="center", color="#FFFFFF", weight="BOLD")),
                     ft.DataCell(ft.Text(str(despesa.get("data",
-                                        text_align="center", color="#FFFFFF", weight="BOLD")))),
+                                        )),text_align="center", color="#FFFFFF", weight="BOLD")),
 
                     ft.DataCell(
                         ft.IconButton(
