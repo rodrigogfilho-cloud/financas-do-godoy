@@ -22,7 +22,6 @@ CREATE TABLE IF NOT EXISTS tb_despesas (
  id_usuario INT NOT NULL,
  valor FLOAT(10),
  data DATE,
- hora TIME(6),
  id_categoria INT
 );
 

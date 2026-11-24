@@ -4,7 +4,7 @@ class Despesa:
     def __init__(self):
         pass
     @staticmethod
-    def incluir (login:int, descricao:str , valor:float,   id_categoria:int = None) -> int:
+    def incluir (login:int, descricao:str , valor:float,  data:str,id_categoria:int = None) -> int:
      
         conexao, cursor = Conexao().conectar()
                 
@@ -14,10 +14,10 @@ class Despesa:
         
         try:
             cursor.execute("""
-                    INSERT INTO tb_despesas(id_usuario, descricao, valor ,id_categoria)
-                    VALUES (%s, %s, %s, %s);
+                    INSERT INTO tb_despesas(id_usuario, descricao, valor ,id_categoria, data)
+                    VALUES (%s, %s, %s, %s, %s);
                         """,
-                [login, descricao, valor, id_categoria ])
+                [login, descricao, valor, id_categoria, data ])
         
             conexao.commit()
             conexao.close()
@@ -36,8 +36,16 @@ class Despesa:
             return None
         try:        
             cursor.execute("""
-                            select id_despesa, descricao, valor, data, hora, id_categoria from tb_despesas
-                            where id_usuario = %s
+                            SELECT id_despesa ,
+                            descricao, 
+                            tb_despesas.id_usuario,
+                            valor,
+                            data, 
+                            tb_despesas.id_categoria,
+                            tb_categorias.tipo 
+                            FROM tb_despesas
+                            INNER JOIN tb_categorias ON tb_categorias.id_categoria = tb_despesas.id_categoria
+                            WHERE tb_despesas.id_usuario = %s ;
             
                             """,
                         [login])
@@ -60,7 +68,7 @@ class Despesa:
             return None
         try:        
             cursor.execute("""
-                            select id_despesa ,descricao, id_usuario, valor, data, hora, id_categoria from tb_despesas
+                            select id_despesa ,descricao, id_usuario, valor, data, id_categoria from tb_despesas
                             where id_usuario = %s
                             and id_categoria = %s;
             
